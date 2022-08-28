@@ -1,8 +1,12 @@
-// import models
+
+// IMPORT MODELS
 const Product = require('./Product');
 const Category = require('./Category');
 const Tag = require('./Tag');
 const ProductTag = require('./ProductTag');
+
+
+// ASSOCIATIONS
 
 // Products belongsTo Category
 
@@ -12,9 +16,11 @@ const ProductTag = require('./ProductTag');
 
 // Tags belongToMany Products (through ProductTag)
 
+
+// EXPORT MODELS
 module.exports = {
-  Product,
-  Category,
-  Tag,
-  ProductTag,
+    Product,
+    Category,
+    Tag,
+    ProductTag
 };
