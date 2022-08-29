@@ -105,6 +105,12 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     try{
+        let productFound = await findOneProduct(req.params.id);
+        if(!productFound){
+            res.status(404).json({message: `No product found with ID:${req.params.id}`});
+            return;
+        }
+
         let result = await Product.update(
             req.body, // {product_name: '', price: #.##, stock: #, category_id: #, OPTIONAL tagIds: [#, #, ...]}
             {where: {id: req.params.id}}
@@ -147,7 +153,7 @@ router.put('/:id', async (req, res) => {
         if (wasSuccessful)
             res.json({message: 'success'});
         else
-            res.status(400).json({message: `No product found with ID:${req.params.id}; or, no 'real' updates actually submitted; or, object attributes are missing from body of request`});
+            res.status(400).json({message: "No 'real' updates actually submitted; or, object attributes are missing from body of request"});
     }catch(err){
         console.error(err);
         res.status(500).json(err);

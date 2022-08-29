@@ -17,7 +17,8 @@ router.get('/', (req, res) =>
                 model: ProductTag,
                 attributes: []
             }
-        }
+        },
+        order: [['id', 'ASC']]
     }).then(dbTagsData => res.json(dbTagsData))
     .catch(err => {
         console.error(err);

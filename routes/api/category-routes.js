@@ -11,8 +11,10 @@ router.get('/', (req, res) =>
     Category.findAll({
         include: {
             model: Product,
-            attributes: ['id', 'product_name', 'price', 'stock']
-        }
+            attributes: ['id', 'product_name', 'price', 'stock'],
+            order: [['id', 'ASC']]
+        },
+        order: [['id', 'ASC']]
     }).then(dbCategoriesData => res.json(dbCategoriesData))
     .catch(err => {
         console.error(err);
@@ -26,7 +28,8 @@ router.get('/:id', (req, res) =>
         where: {id: req.params.id},
         include: {
             model: Product,
-            attributes: ['id', 'product_name', 'price', 'stock']
+            attributes: ['id', 'product_name', 'price', 'stock'],
+            order: [['id', 'ASC']]
         }
     }).then(dbCategoryData => {
         if (!dbCategoryData){
