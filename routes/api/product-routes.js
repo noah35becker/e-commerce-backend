@@ -2,6 +2,7 @@
 // IMPORTS
 const router = require('express').Router();
 const {Product, Category, Tag, ProductTag} = require('../../models');
+const {Op} = require('sequelize');
 
 
 
@@ -48,8 +49,7 @@ router.get('/', (req, res) =>
                 }
             }
         ]
-    })
-    .then(dbProductsData => res.json(dbProductsData))
+    }).then(dbProductsData => res.json(dbProductsData))
     .catch(err => {
         console.error(err);
         res.status(500).json(err);
@@ -57,7 +57,7 @@ router.get('/', (req, res) =>
 );
 
 
-router.get('/:id', (req, res) => {
+router.get('/:id', (req, res) => 
     findOneProduct(req.params.id)
     .then(dbProductData => {
         if (!dbProductData){
@@ -69,7 +69,7 @@ router.get('/:id', (req, res) => {
         console.error(err);
         res.status(500).json(err);
     })
-});
+);
 
 
 router.post('/', async (req, res) => {
@@ -106,7 +106,7 @@ router.put('/:id', async (req, res) => {
         );
         let wasSuccessful = result[0] === 1;
 
-        if (req.body.tagIds && req.body.tagIds.length){
+        if (req.body.tagIds){
             const productTags = await ProductTag.findAll({where: {product_id: req.params.id}}); // Get array of ProductTags for this product only
             const submittedTagIds = req.body.tagIds.sort((a, b) => a - b); // sort in asc order
                 
@@ -126,10 +126,10 @@ router.put('/:id', async (req, res) => {
                 .filter(({tag_id}) => !submittedTagIds.includes(tag_id))
                 .map(({id}) => id);
 
+            // Add new ProductTags + remove unused ProductTags if needed
             if (newProductTags.length || productTagsToRemove.length){
-                // Add new ProductTags + remove unused ProductTags
                 await Promise.all([
-                    ProductTag.destroy({where: {id: productTagsToRemove}}),
+                    ProductTag.destroy({where: {id: {[Op.or]: productTagsToRemove}}}),
                     ProductTag.bulkCreate(newProductTags)
                 ]);
                 wasSuccessful = true;
