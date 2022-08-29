@@ -44,9 +44,8 @@ router.get('/:id', (req, res) =>
 
 
 router.post('/', (req, res) =>
-    Category.create({
-        category_name: req.body.name
-    }).then(dbCategoryData => res.json(dbCategoryData))
+    Category.create(req.body) // {category_name: ''}
+    .then(dbCategoryData => res.json(dbCategoryData))
     .catch(err => {
         console.error(err);
         res.status(400).json(err);
@@ -56,7 +55,7 @@ router.post('/', (req, res) =>
 
 router.put('/:id', (req, res) => 
     Category.update(
-        {category_name: req.body.name},
+        req.body, // {category_name: ''}
         {where: {id: req.params.id}}
     ).then(([wasSuccessful]) => {
         if (!wasSuccessful){
