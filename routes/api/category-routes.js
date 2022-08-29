@@ -14,7 +14,7 @@ router.get('/', (req, res) =>
             attributes: ['id', 'product_name', 'price', 'stock']
         }
     })
-    .then(dbCategoryData => res.json(dbCategoryData))
+    .then(dbCategoriesData => res.json(dbCategoriesData))
     .catch(err => {
         console.error(err);
         res.status(500).json(err);
@@ -60,10 +60,10 @@ router.put('/:id', (req, res) =>
         {where: {id: req.params.id}}
     ).then(([wasSuccessful]) => {
         if (!wasSuccessful){
-            res.status(404).json({message: 'No category found with this ID'});
+            res.status(404).json({message: "No category found with this ID (or, no 'real' updates actually submitted"});
             return;
         } else
-            res.json({message: 'Success'});
+            res.json({message: 'success'});
     }).catch(err => {
         console.error(err);
         res.status(500).json(err);
@@ -78,7 +78,7 @@ router.delete('/:id', (req, res) =>
             res.status(404).json({message: 'No category found with this ID'});
             return;
         } else
-            res.json({message: 'Success'});
+            res.json({message: 'success'});
     }).catch(err => {
         console.error(err);
         res.status(500).json(err);
