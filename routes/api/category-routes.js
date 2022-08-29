@@ -59,10 +59,10 @@ router.put('/:id', (req, res) =>
         {where: {id: req.params.id}}
     ).then(([wasSuccessful]) => {
         if (!wasSuccessful){
-            res.status(404).json({message: "No category found with this ID (or, no 'real' updates actually submitted"});
+            res.status(400).json({message: "No category found with this ID; or, no 'real' updates actually submitted"});
             return;
-        } else
-            res.json({message: 'success'});
+        }
+        res.json({message: 'success'});
     }).catch(err => {
         console.error(err);
         res.status(500).json(err);
@@ -76,8 +76,8 @@ router.delete('/:id', (req, res) =>
         if (!wasSuccessful){
             res.status(404).json({message: 'No category found with this ID'});
             return;
-        } else
-            res.json({message: 'success'});
+        }
+        res.json({message: 'success'});
     }).catch(err => {
         console.error(err);
         res.status(500).json(err);
