@@ -61,7 +61,7 @@ router.get('/:id', (req, res) =>
     findOneProduct(req.params.id)
     .then(dbProductData => {
         if (!dbProductData){
-            res.status(404).json({message: 'No product found with this ID'});
+            res.status(404).json({message: `No product found with ID:${req.params.id}`});
             return;
         }
         res.json(dbProductData);
@@ -139,7 +139,7 @@ router.put('/:id', async (req, res) => {
         if (wasSuccessful)
             res.json({message: 'success'});
         else
-            res.status(400).json({message: "No category found with this ID; or, no 'real' updates actually submitted; or, object attributes are missing from body of request"});
+            res.status(400).json({message: `No product found with ID:${req.params.id}; or, no 'real' updates actually submitted; or, object attributes are missing from body of request`});
     }catch(err){
         console.error(err);
         res.status(500).json(err);
@@ -151,7 +151,7 @@ router.delete('/:id', (req, res) =>
     Product.destroy({where: {id: req.params.id}})
     .then(wasSuccessful => {
         if (!wasSuccessful){
-            res.status(404).json({message: 'No product found with this ID'});
+            res.status(404).json({message: `No product found with ID:${req.params.id}`});
             return;
         }
         res.json({message: 'success'});

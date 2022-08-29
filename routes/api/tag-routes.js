@@ -40,7 +40,7 @@ router.get('/:id', (req, res) =>
         }
     }).then(dbTagData => {
         if (!dbTagData){
-            res.status(404).json({message: 'No tag found with this ID'});
+            res.status(404).json({message: `No tag found with ID:${req.params.id}`});
             return;
         }
         res.json(dbTagData);
@@ -67,7 +67,7 @@ router.put('/:id', (req, res) =>
         {where: {id: req.params.id}}
     ).then(([wasSuccessful]) => {
         if (!wasSuccessful){
-            res.status(400).json({message: "No tag found with this ID; or, no 'real' updates actually submitted"});
+            res.status(400).json({message: `No tag found with ID:${req.params.id}; or, no 'real' updates actually submitted`});
             return;
         }
         res.json({message: 'success'});
@@ -82,7 +82,7 @@ router.delete('/:id', (req, res) =>
     Tag.destroy({where: {id: req.params.id}})
     .then(wasSuccessful => {
         if (!wasSuccessful){
-            res.status(404).json({message: 'No category found with this ID'});
+            res.status(404).json({message: `No tag found with ID:${req.params.id}`});
             return;
         }
         res.json({message: 'success'});
