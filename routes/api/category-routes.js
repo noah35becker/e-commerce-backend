@@ -13,8 +13,7 @@ router.get('/', (req, res) =>
             model: Product,
             attributes: ['id', 'product_name', 'price', 'stock']
         }
-    })
-    .then(dbCategoriesData => res.json(dbCategoriesData))
+    }).then(dbCategoriesData => res.json(dbCategoriesData))
     .catch(err => {
         console.error(err);
         res.status(500).json(err);
@@ -29,8 +28,7 @@ router.get('/:id', (req, res) =>
             model: Product,
             attributes: ['id', 'product_name', 'price', 'stock']
         }
-    })
-    .then(dbCategoryData => {
+    }).then(dbCategoryData => {
         if (!dbCategoryData){
             res.status(404).json({message: 'No category found with this ID'});
             return;
