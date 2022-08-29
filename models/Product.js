@@ -20,6 +20,7 @@ Product.init(
         product_name: {
             type: DataTypes.STRING,
             allowNull: false,
+            unique: true,
             validate: {
                 len: [1] // must be at least 1 character long
             }

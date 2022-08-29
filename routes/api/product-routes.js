@@ -2,11 +2,10 @@
 // IMPORTS
 const router = require('express').Router();
 const {Product, Category, Tag, ProductTag} = require('../../models');
-const {Op} = require('sequelize');
 
 
 
-// findOneProduct function
+// Find one product in database, based on its ID
 async function findOneProduct(productId){
     return await Product.findOne({
         where: {id: productId},
@@ -27,6 +26,11 @@ async function findOneProduct(productId){
         ]
     });
 }
+
+// Remove duplicates from an array
+Array.prototype.removeDuplicates = function(){
+    return this.filter((elem, index) => this.indexOf(elem) === index)
+};
 
 
 
@@ -79,6 +83,7 @@ router.post('/', async (req, res) => {
         // If necessary, populate ProductTag through-table with new relationships
         if (req.body.tagIds && req.body.tagIds.length){
             const productTagIdArr = req.body.tagIds
+                .removeDuplicates()
                 .sort((a, b) => a - b) // sort Tag IDs in asc order
                 .map(tagId => {
                     return {
@@ -108,7 +113,9 @@ router.put('/:id', async (req, res) => {
 
         if (req.body.tagIds){
             const productTags = await ProductTag.findAll({where: {product_id: req.params.id}}); // Get array of ProductTags for this product only
-            const submittedTagIds = req.body.tagIds.sort((a, b) => a - b); // sort in asc order
+            const submittedTagIds = req.body.tagIds
+                .removeDuplicates()
+                .sort((a, b) => a - b); // sort in asc order
                 
             // Get array of new ProductTags
             const currentTagIdsOfProduct = productTags.map(({tag_id}) => tag_id);
@@ -126,10 +133,11 @@ router.put('/:id', async (req, res) => {
                 .filter(({tag_id}) => !submittedTagIds.includes(tag_id))
                 .map(({id}) => id);
 
+
             // Add new ProductTags + remove unused ProductTags if needed
             if (newProductTags.length || productTagsToRemove.length){
                 await Promise.all([
-                    ProductTag.destroy({where: {id: {[Op.or]: productTagsToRemove}}}),
+                    ProductTag.destroy({where: {id: productTagsToRemove}}),
                     ProductTag.bulkCreate(newProductTags)
                 ]);
                 wasSuccessful = true;
