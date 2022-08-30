@@ -48,17 +48,37 @@ DB_PW = 'your-mysql-password-goes-here'
 ## Usage
 If you haven't already, open the terminal and `cd` to the program folder you downloaded during [installation](#installation). Then run the command `npm start` to initialize the server on local port 3001. You can now make API requests at the following routes:
 - `http://localhost:3001/api/categories`
-    - GET (all categories), POST
+    - GET (all categories)
+    - POST: Body must be a JSON object with the property `category_name` (string)
+    - PUT: Body must be a JSON object with the property `category_name` (string)
 - `http://localhost:3001/api/categories/ID-GOES-HERE`
-    - GET (one category), PUT, DELETE
+    - GET (one category)
+    - PUT: Body must be a JSON object with the property `category_name` (string)
+    - DELETE
 - `http://localhost:3001/api/products`
-    - GET (all products), POST
+    - GET (all products)
+    - POST: Body must be a JSON object with the properties:   
+        - `product_name` (string)
+        - `price` (decimal #)
+        - `stock` (integer)
+        - `category_id` (integer)
+        - <i>`tagIds` (array of integers) (*optional)</i>
 - `http://localhost:3001/api/products/ID-GOES-HERE`
-    - GET (one product), PUT, DELETE
+    - GET (one product)
+    - PUT: Body must be a JSON object with the properties:   
+        - `product_name` (string)
+        - `price` (decimal #)
+        - `stock` (integer)
+        - `category_id` (integer)
+        - <i>`tagIds` (array of integers) (*optional)</i>
+    - DELETE
 - `http://localhost:3001/api/tags`
-    - GET (all tags), POST
+    - GET (all tags)
+    - POST: Body must be a JSON object with the property `tag_name` (string)
 - `http://localhost:3001/api/tags/ID-GOES-HERE`
-    - GET (one tag), PUT, DELETE
+    - GET (one tag)
+    - PUT: Body must be a JSON object with the property `tag_name` (string)
+    - DELETE
 
 
 ## Testing
