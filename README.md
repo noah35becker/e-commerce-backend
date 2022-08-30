@@ -65,12 +65,12 @@ If you haven't already, open the terminal and `cd` to the program folder you dow
         - <i>`tagIds` (array of integers) (*optional)</i>
 - `http://localhost:3001/api/products/ID-GOES-HERE`
     - GET (one product)
-    - PUT: Body must be a JSON object with the properties:   
+    - PUT: Body must be a JSON object with any of the following properties:   
         - `product_name` (string)
         - `price` (decimal #)
         - `stock` (integer)
         - `category_id` (integer)
-        - <i>`tagIds` (array of integers) (*optional)</i>
+        - `tagIds` (array of integers)
     - DELETE
 - `http://localhost:3001/api/tags`
     - GET (all tags)

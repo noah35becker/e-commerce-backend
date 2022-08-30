@@ -153,7 +153,7 @@ router.put('/:id', async (req, res) => {
         if (wasSuccessful)
             res.json({message: 'success'});
         else
-            res.status(400).json({message: "No 'real' updates actually submitted; or, object attributes are missing from body of request"});
+            res.status(400).json({message: "No 'real' updates actually submitted"});
     }catch(err){
         console.error(err);
         res.status(500).json(err);
