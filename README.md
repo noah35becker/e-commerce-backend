@@ -13,7 +13,7 @@ This project utilizes SQL to construct backend API routes for a database of prod
 
 
 ## Video walkthrough
-[LINK GOES HERE](LINK GOES HERE)
+[https://www.youtube.com/watch?v=Pr1RRiCIjGQ](https://www.youtube.com/watch?v=Pr1RRiCIjGQ)
 
 
 <i><b>
