@@ -57,12 +57,12 @@ If you haven't already, open the terminal and `cd` to the program folder you dow
     - DELETE
 - `http://localhost:3001/api/products`
     - GET (all products)
-    - POST: Body must be a JSON object with the properties:   
+    - POST: Body must be a JSON object with the following properties:   
         - `product_name` (string)
         - `price` (decimal #)
-        - `stock` (integer)
-        - `category_id` (integer)
-        - <i>`tagIds` (array of integers) (*optional)</i>
+        - <i>`stock` (integer) (*optional, defaults to `10` if omitted)
+        - `category_id` (integer) (*optional, defaults to `null` if omitted)
+        - `tagIds` (array of integers) (*optional, defaults to `[]` if omitted)</i>
 - `http://localhost:3001/api/products/ID-GOES-HERE`
     - GET (one product)
     - PUT: Body must be a JSON object with any of the following properties:   
