@@ -9,7 +9,7 @@
 
 
 ## Description
-This project utilizes SQL to construct the backend for a database of e-commerce products and their associated categories <i>(maximum 1 per product)</i> and tags <i>(however many per product)</i>.
+This project utilizes SQL to construct backend API routes for a database of products and their associated categories <i>(maximum 1 per product)</i> and tags <i>(however many per product)</i>.
 
 
 ## Video walkthrough
