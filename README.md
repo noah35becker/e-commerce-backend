@@ -41,8 +41,8 @@ DB_USER = 'your-mysql-username-goes-here'
 DB_PW = 'your-mysql-password-goes-here'
 ```
 5. Open the terminal, `cd` to the program folder, and run the command `npm install`.
-6. Run the command `mysql -u username -p` (with your MySQL username in place of `username`). Enter your MySQL password when prompted. Once you've logged in, run the command `source db/schema.sql;` to initialize the database. (You can repeat this step in the future if you ever want to reset the database.)
-7. Run the command `quit;` to log out of MySQL. You're all set!
+6. Run the command `mysql -u username -p` (with your MySQL username in place of `username`). Enter your MySQL password when prompted. Once you've logged in to the MySQL shell, run the command `source db/schema.sql;` to initialize the database. (You can repeat this step in the future if you ever want to reset the database.)
+7. Run the command `quit;` to exit the MySQL shell. You're all set!
 
 
 ## Usage
